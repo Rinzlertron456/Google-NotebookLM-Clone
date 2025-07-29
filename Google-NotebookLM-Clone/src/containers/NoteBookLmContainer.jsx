@@ -1,42 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
+import ChatContainer from "./ChatContainer";
 
-const NoteBookLmContainer = () => {
-  const [pdfUrl, setPdfUrl] = useState(null);
-
-  const handleFile = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const url = URL.createObjectURL(file).concat("#toolbar=0&view=fitH");
-      setPdfUrl(url);
-    }
-  };
+const NoteBookLmContainer = (props) => {
   return (
-    <>
+    <div
+      className="notebook-lm-container"
+      style={{
+        display: "flex",
+        width: "100%",
+        height: "100vh",
+      }}
+    >
+      <ChatContainer />
+
       <div
-        className="noteboom-lm-container"
         style={{
-          display: "flex",
-          flexDirection: "row",
-          width: "100%",
+          width: "50%",
+          overflow: "hidden",
+          // position: "relative",
         }}
       >
-        <div style={{ width: "50%", padding: "20px" }}>
-          <h3>📄 View PDF</h3>
-          <input type="file" accept=".pdf, .txt" onChange={handleFile} />
-          <br />
-          <br />
-        </div>
-        {pdfUrl && (
-          <iframe
-            className="pdf-viewer"
-            src={pdfUrl}
-            width="50%"
-            height="1500px"
-            title="PDF Viewer"
-          />
-        )}
+        <iframe
+          name="pdf-viewer"
+          src={props.pdfUrl}
+          title="PDF Viewer"
+          style={{
+            width: "102%",
+            height: "102%",
+            border: "none",
+          }}
+        />
       </div>
-    </>
+    </div>
   );
 };
 
