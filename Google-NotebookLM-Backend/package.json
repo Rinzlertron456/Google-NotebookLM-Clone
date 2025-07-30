@@ -12,6 +12,7 @@
   "dependencies": {
     "@langchain/community": "^0.3.49",
     "@langchain/core": "^0.3.66",
+    "@langchain/ollama": "^0.2.3",
     "@langchain/openai": "^0.6.3",
     "@langchain/textsplitters": "^0.1.0",
     "cors": "^2.8.5",

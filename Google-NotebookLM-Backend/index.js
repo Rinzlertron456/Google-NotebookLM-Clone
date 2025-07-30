@@ -1,6 +1,5 @@
 const express = require("express");
 const cors = require("cors");
-
 const uploadRoutes = require("./routes/upload");
 const { router: embedRoutes } = require("./routes/embed");
 const chatRoutes = require("./routes/chat");
@@ -12,9 +11,6 @@ app.use(cors());
 app.use(express.json());
 
 const PORT = process.env.PORT || 5000;
-
-app.use(cors());
-app.use(express.json());
 
 // Routes
 app.use("/api/upload", uploadRoutes);

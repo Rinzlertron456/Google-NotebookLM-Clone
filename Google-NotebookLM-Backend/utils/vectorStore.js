@@ -6,18 +6,12 @@ const cosineSimilarity = (a, b) => {
   return dot / (magA * magB);
 };
 
-// Simple in-memory vector store
-let store = [];
-
 function saveToVectorStore(embeddingObjects) {
-  global.vectorStore = embeddingObjects; // ✅ assign to global
-  console.log(
-    `✅ Vector store initialized with ${embeddingObjects.length} chunks`
-  );
+  global.vectorStore = embeddingObjects;
 }
 
 function queryVectorStore(embedding, topK = 3) {
-  if (!global.vectorStore || global.vectorStore.length === 0) {
+  if (!global.vectorStore) {
     console.error("Vector store is empty or not initialized.");
     return [];
   }

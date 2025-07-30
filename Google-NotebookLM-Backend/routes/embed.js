@@ -1,14 +1,12 @@
 const express = require("express");
 const { getChunks } = require("../utils/chunkPdf");
 const { MemoryVectorStore } = require("langchain/vectorstores/memory");
-const { OllamaEmbeddings } = require("@langchain/community/embeddings/ollama");
-const path = require("path");
+const { OllamaEmbeddings } = require("@langchain/ollama");
 
 const router = express.Router();
 
-let vectorStore = null; // In-memory store to be used in chat
+let vectorStore = null;
 
-// POST /api/embed
 router.post("/", async (req, res) => {
   try {
     const chunks = getChunks();
@@ -19,14 +17,10 @@ router.post("/", async (req, res) => {
       });
     }
 
-    // Embedding model path (LlamaCpp or local embedding model)
-    const modelPath = path.join(__dirname, "..", "models", "ggml-model-q4.bin");
-
     const embeddings = new OllamaEmbeddings({
-      model: "llama3", // or "mistral", "codellama", etc.
+      model: "llama3",
     });
 
-    // Create vector store from chunks
     const texts = chunks.map((chunk) => chunk.text);
     const metadata = chunks.map((chunk) => ({ page: chunk.page }));
 

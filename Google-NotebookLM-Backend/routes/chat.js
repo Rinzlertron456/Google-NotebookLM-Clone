@@ -10,22 +10,17 @@ router.post("/", async (req, res) => {
   try {
     const { question } = req.body;
 
-    // 1. Embed the user question
     const qEmbedding = await getEmbeddingsFromOllama([question]);
 
-    // 2. Search the vector store for top relevant chunks
     const topChunks = queryVectorStore(qEmbedding[0].embedding, 3);
 
-    // 3. Construct chat prompt using context
-    const context = topChunks.map((c) => c.text).join("\n\n");
-    const systemPrompt = "Answer based on the PDF content below:\n\n" + context;
+    const context = topChunks.map((c) => c.text).join(" ");
+    const systemPrompt = "Answer based on the PDF content below:- " + context;
 
     const messages = [
       { role: "system", content: systemPrompt },
       { role: "user", content: question },
     ];
-
-    // 4. Get response from Ollama
     const answer = await askOllama(messages);
 
     res.json({

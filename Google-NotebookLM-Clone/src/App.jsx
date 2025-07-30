@@ -7,8 +7,11 @@ const App = () => {
   const [pdfUrl, setPdfUrl] = useState(null);
   const handleFileUpload = (file) => {
     if (file) {
-      const url = URL.createObjectURL(file).concat("#toolbar=0&view=fitH");
-      setPdfUrl(url);
+      const url = URL.createObjectURL(file);
+      console.log(file);
+
+      const newUrl = url.concat("#toolbar=0&view=fitH");
+      setPdfUrl(newUrl);
       setFileUploaded(true);
     }
   };
