@@ -1,4 +1,3 @@
-// routes/chat.js
 const express = require("express");
 const { getEmbeddingsFromOllama } = require("../utils/embedder");
 const { queryVectorStore } = require("../utils/vectorStore");

@@ -2,27 +2,21 @@ import { useState } from "react";
 import NoteBookLmContainer from "./containers/NoteBookLmContainer";
 import HomeContainer from "./containers/HomeContainer";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Provider } from "react-redux";
+import { store } from "./store/index";
 const App = () => {
   const [isFileUploaded, setFileUploaded] = useState(false);
-  const [pdfUrl, setPdfUrl] = useState(null);
-  const handleFileUpload = (file) => {
-    if (file) {
-      const url = URL.createObjectURL(file);
-      console.log(file);
-
-      const newUrl = url.concat("#toolbar=0&view=fitH");
-      setPdfUrl(newUrl);
-      setFileUploaded(true);
-    }
+  const handleUploadStatus = () => {
+    setFileUploaded(true);
   };
   return (
-    <>
+    <Provider store={store}>
       {!isFileUploaded ? (
-        <HomeContainer handleFileUpload={handleFileUpload} />
+        <HomeContainer handleUploadStatus={handleUploadStatus} />
       ) : (
-        <NoteBookLmContainer pdfUrl={pdfUrl} />
+        <NoteBookLmContainer />
       )}
-    </>
+    </Provider>
   );
 };
 

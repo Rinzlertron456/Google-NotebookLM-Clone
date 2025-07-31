@@ -1,4 +1,3 @@
-// embedder.js
 const axios = require("axios");
 
 async function getEmbeddingsFromOllama(textChunks) {

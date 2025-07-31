@@ -12,7 +12,6 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 5000;
 
-// Routes
 app.use("/api/upload", uploadRoutes);
 app.use("/api/embed", embedRoutes);
 app.use("/api/chat", chatRoutes);

@@ -11,6 +11,7 @@ const upload = multer({ dest: "uploads/" });
 
 router.post("/", upload.single("pdf"), async (req, res) => {
   try {
+    console.log(req.file);
     const pdfBuffer = fs.readFileSync(req.file.path);
 
     const data = await pdfParse(pdfBuffer);

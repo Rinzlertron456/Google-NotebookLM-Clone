@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import ChatContainer from "./ChatContainer";
+import { useSelector } from "react-redux";
+import PdfContainer from "./PdfContainer";
 
-const NoteBookLmContainer = (props) => {
+const NoteBookLmContainer = () => {
+  const { url } = useSelector((state) => state.upload);
+  const [selectedPage, setSelectedPage] = useState(null);
+
   return (
     <div
       className="notebook-lm-container"
@@ -11,26 +16,8 @@ const NoteBookLmContainer = (props) => {
         height: "100vh",
       }}
     >
-      <ChatContainer />
-
-      <div
-        style={{
-          width: "50%",
-          overflow: "hidden",
-          // position: "relative",
-        }}
-      >
-        <iframe
-          name="pdf-viewer"
-          src={props.pdfUrl}
-          title="PDF Viewer"
-          style={{
-            width: "102%",
-            height: "102%",
-            border: "none",
-          }}
-        />
-      </div>
+      <ChatContainer setSelectedPage={setSelectedPage} />
+      <PdfContainer url={url} selectedPage={selectedPage} />
     </div>
   );
 };
