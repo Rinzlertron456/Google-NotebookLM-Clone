@@ -35,12 +35,9 @@ const ChatContainer = ({ setSelectedPage }) => {
     setLoading(true);
 
     try {
-      const result = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/chat`,
-        {
-          question: userQuery,
-        }
-      );
+      const result = await axios.post(`${backendUrl}/api/chat`, {
+        question: userQuery,
+      });
       setResponse(result.data);
       dispatch(addResponse(result.data));
       setHasRespondedOnce(true);

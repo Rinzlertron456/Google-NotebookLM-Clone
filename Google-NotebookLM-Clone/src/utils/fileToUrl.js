@@ -12,5 +12,9 @@ export const fileToUrl = async ({ file, dispatch }) => {
   const formData = new FormData();
   formData.append("pdf", file);
 
-  await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/upload`, formData);
+  try {
+    await axios.post(`${backendUrl}/api/upload`, formData);
+  } catch (error) {
+    console.error("Upload failed:", error.response?.data || error.message);
+  }
 };
