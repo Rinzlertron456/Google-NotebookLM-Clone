@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { FaRegFileAlt } from "react-icons/fa";
 import { FiUser } from "react-icons/fi";
-import axios from "axios";
 import { useDispatch } from "react-redux";
 import Button from "./Button";
 import { fileToUrl } from "../utils/fileToUrl";

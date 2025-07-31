@@ -15,7 +15,8 @@ const ChatContainer = ({ setSelectedPage }) => {
   const [response, setResponse] = useState("");
   const [isLoading, setLoading] = useState(false);
   const [hasRespondedOnce, setHasRespondedOnce] = useState(false);
-
+  const backendUrl =
+    import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
   const handleQuerySize = (e) => {
     const newText = e.target.value;
     e.target.style.height = "auto";
@@ -34,9 +35,12 @@ const ChatContainer = ({ setSelectedPage }) => {
     setLoading(true);
 
     try {
-      const result = await axios.post("http://localhost:5000/api/chat", {
-        question: userQuery,
-      });
+      const result = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/chat`,
+        {
+          question: userQuery,
+        }
+      );
       setResponse(result.data);
       dispatch(addResponse(result.data));
       setHasRespondedOnce(true);
