@@ -9,7 +9,7 @@ dotenv.config();
 const app = express();
 app.use(
   cors({
-    origin: "https://google-notebook-lm-clone-rouge.vercel.app",
+    origin: process.env.FRONTEND_ORIGIN || "http://localhost:5173",
     credentials: true,
   })
 );
