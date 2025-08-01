@@ -8,7 +8,15 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin:
+      "https://google-notebook-lm-clone-jykus9doq-vinayak-santhoshs-projects.vercel.app",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    credentials: true,
+  })
+);
+app.options("*", cors());
 const PORT = process.env.PORT || 5000;
 
 app.use("/api/upload", uploadRoutes);
