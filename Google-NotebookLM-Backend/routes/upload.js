@@ -34,6 +34,7 @@ router.post("/", upload.single("pdf"), async (req, res) => {
       chunksCount: chunks.length,
     });
   } catch (err) {
+    console.error("Upload error:", err);
     res
       .status(500)
       .json({ error: "Failed to process PDF.", details: err.message });
