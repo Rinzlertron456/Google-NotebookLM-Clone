@@ -17,9 +17,7 @@ router.post("/", async (req, res) => {
       });
     }
 
-    const embeddings = new OllamaEmbeddings({
-      model: "llama3",
-    });
+    const embeddings = new OllamaEmbeddings({ model: "llama3" });
 
     const texts = chunks.map((chunk) => chunk.text);
     const metadata = chunks.map((chunk) => ({ page: chunk.page }));
@@ -40,8 +38,4 @@ router.post("/", async (req, res) => {
   }
 });
 
-function getVectorStore() {
-  return vectorStore;
-}
-
-module.exports = { router, getVectorStore };
+module.exports = router;

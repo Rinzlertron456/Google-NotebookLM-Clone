@@ -1,6 +1,6 @@
 const express = require("express");
 const uploadRoutes = require("./routes/upload");
-const { router: embedRoutes } = require("./routes/embed");
+const embedRoutes = require("./routes/embed");
 const chatRoutes = require("./routes/chat");
 const cors = require("cors");
 const dotenv = require("dotenv");
