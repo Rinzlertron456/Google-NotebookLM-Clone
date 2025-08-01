@@ -7,21 +7,27 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const app = express();
-app.use(
-  cors({
-    origin: "https://google-notebook-lm-clone-rouge.vercel.app",
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    credentials: true,
-  })
-);
+// app.use(
+//   cors({
+//     origin: "https://google-notebook-lm-clone-rouge.vercel.app",
+//     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+//     credentials: true,
+//   })
+// );
+app.use(cors()); // allow all origins temporarily
+
 app.use(express.json());
 
 app.options("*", cors());
 const PORT = process.env.PORT || 5000;
 
-app.use("/api/upload", uploadRoutes);
-app.use("/api/embed", embedRoutes);
-app.use("/api/chat", chatRoutes);
+try {
+  app.use("/api/upload", uploadRoutes);
+  app.use("/api/embed", embedRoutes);
+  app.use("/api/chat", chatRoutes);
+} catch (e) {
+  console.error("Router mount failed:", e);
+}
 
 app.get("/", (req, res) => {
   res.send("NotebookLM Clone API is running...");
