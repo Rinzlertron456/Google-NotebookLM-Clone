@@ -1,5 +1,4 @@
 const express = require("express");
-// const cors = require("cors");
 const uploadRoutes = require("./routes/upload");
 const { router: embedRoutes } = require("./routes/embed");
 const chatRoutes = require("./routes/chat");
@@ -7,12 +6,6 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const app = express();
-// app.use(
-//   cors({
-//     origin: "*",
-//     credentials: true,
-//   })
-// );
 app.use(express.json());
 
 const PORT = process.env.PORT || 5000;
