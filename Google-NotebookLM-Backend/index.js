@@ -7,15 +7,15 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const app = express();
-app.use(express.json());
 app.use(
   cors({
-    origin:
-      "https://google-notebook-lm-clone-jykus9doq-vinayak-santhoshs-projects.vercel.app",
+    origin: "https://google-notebook-lm-clone-rouge.vercel.app",
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
   })
 );
+app.use(express.json());
+
 app.options("*", cors());
 const PORT = process.env.PORT || 5000;
 
